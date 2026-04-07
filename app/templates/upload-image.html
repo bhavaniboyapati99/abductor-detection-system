@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upload Suspicious Image</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+  <!-- Load JS in correct order -->
+  
+  <script src="{{ url_for('static', filename='main.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='upload.js') }}" defer></script>
+
+</head>
+<body>
+ <!-- ✅ Token check -->
+<script>
+  const token = localStorage.getItem("access_token");
+  if (!token) {
+    alert("Please login first.");
+    // Save current page to redirect after login
+    localStorage.setItem("redirect_after_login", window.location.href);
+    // Redirect to login
+    window.location.href = "/common-login";
+  }
+</script>
+
+  <div class="form-box">
+    <h2>Upload Suspicious Image</h2>
+
+   <form id="uploadForm">
+      <label>Select Image:</label>
+      <input id="imgInput" type="file" accept="image/*" onchange="previewImage('imgInput', 'imgPreview')" required />
+      <img id="imgPreview" style="display:none; width:100%; margin-top:1em; border-radius:10px;" />
+
+      <!-- ✅ With this -->
+      <label>Last Seen Place:</label>
+      <input id="location" name="location" type="text" placeholder="Eg: Near Central Park, Hyderabad" required />
+
+      <label>Last Seen Date & Time:</label>
+      <input id="lastSeen" name="last_seen" type="datetime-local" required />
+
+
+      <label>Description (optional):</label>
+      <textarea id="desc" placeholder="Describe the situation or appearance (optional)"></textarea>
+
+      <button type="submit">Upload</button>
+    </form>
+    <!-- 👇 Add this right after the form -->
+    <p id="result" style="margin-top: 10px; color: white;"></p>
+
+  </div>
+</body>
+</html>

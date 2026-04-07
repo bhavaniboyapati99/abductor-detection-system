@@ -1,0 +1,160 @@
+/* Reset basic layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY: Proper background image setup */
+body {
+  background-image: url("ai-theme.png");   /* ✅ relative path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+
+/* HEADER: Stick it at the top */
+header {
+  background: rgba(22, 27, 34, 0.85);
+  padding: 1em;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid #30363d;
+}
+
+/* MAIN CONTENT: below header */
+main {
+  padding: 2em;
+  background-color: rgba(13, 17, 23, 0.85);
+  max-width: 1000px;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  flex-grow: 1; /* Push footer (if any) to bottom */
+}
+
+
+/* Logo styling */
+.logo-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.logo {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00e676;
+  box-shadow: 0 0 15px rgba(0, 230, 118, 0.7);
+}
+
+/* Portal title */
+header h1 {
+  font-size: 2.8em;
+  margin: 0.5em 0;
+  color: #00e676;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* Navigation bar */
+nav {
+  margin-top: 1em;
+}
+
+nav a {
+  color: #00c853;
+  margin: 0 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+  font-size: 1.1em;
+}
+
+nav a:hover {
+  color: #69f0ae;
+  text-decoration: underline;
+}
+
+/* Main content box */
+main {
+  padding: 3em 2em;
+  text-align: center;
+  background-color: rgba(13, 17, 23, 0.85); /* semi-transparent for readability */
+  margin: 30px auto;
+  max-width: 1000px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Form section inside main */
+.form-box {
+  background-color: #161b22;
+  padding: 30px;
+  max-width: 400px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(88, 166, 255, 0.3);
+  border: 1px solid #30363d;
+}
+
+.form-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00e676;
+}
+
+.form-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-box input[type="text"],
+.form-box input[type="password"],
+.form-box input[type="file"],
+.form-box input[type="email"],
+.form-box textarea {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.form-box input:focus,
+.form-box textarea:focus {
+  outline: none;
+  border-color: #58a6ff;
+  box-shadow: 0 0 8px rgba(88, 166, 255, 0.6);
+}
+
+.form-box input[type="submit"],
+.form-box button {
+  background-color: #238636;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.form-box input[type="submit"]:hover,
+.form-box button:hover {
+  background-color: #2ea043;
+}
+
+.form-box a {
+  color: #79c0ff;
+  text-decoration: none;
+}
+
+.form-box a:hover {
+  text-decoration: underline;
+}

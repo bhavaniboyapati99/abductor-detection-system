@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Register Case</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="form-box">
+    <h2>Register Missing Person Case</h2>
+
+    <form action="{{ url_for('main.register_missing') }}" method="POST" enctype="multipart/form-data">
+      <img src="{{ url_for('static', filename='ai-theme.png') }}" class="logo-img" alt="AI Theme">
+
+      <input type="text" name="name" placeholder="Name of Missing Person" required>
+      <input type="number" name="age" placeholder="Age" required>
+      <input type="text" name="location" placeholder="Last Seen Location" required>
+      <input type="file" name="image" accept="image/*" required>
+      <textarea name="description" placeholder="Additional Details"></textarea>
+
+      <button type="submit">Submit Case</button>
+    </form>
+  </div>
+</body>
+</html>

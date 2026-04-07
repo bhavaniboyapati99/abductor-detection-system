@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Success</title>
+</head>
+<body>
+  <script>
+    // Save JWT token to localStorage
+    localStorage.setItem('access_token', '{{ access_token }}');
+    // Redirect to police dashboard
+    window.location.href = "{{ url_for('main.police_dashboard') }}";
+  </script>
+  <p>Logging you in...</p>
+</body>
+</html>

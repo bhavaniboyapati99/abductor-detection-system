@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+
+      <label for="emailOrMobile">Email / Mobile</label>
+      <input 
+        id="emailOrMobile"
+        type="text"
+        required
+        placeholder="Enter Email or Mobile"
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        required
+        placeholder="Enter Password"
+      >
+
+      <button type="submit">Login</button>
+
+    </form>
+  </div>
+
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const emailOrMobile = document.getElementById("emailOrMobile").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if(!emailOrMobile || !password){
+        alert("Please enter both Email/Mobile and Password.");
+        return;
+    }
+
+    try{
+
+        const response = await fetch("http://127.0.0.1:5001/login",{
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                emailOrMobile: emailOrMobile,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if(response.ok){
+
+            // Save token
+            localStorage.setItem("access_token", data.access_token);
+
+            alert("Login successful!");
+
+            // Redirect logic
+            const redirect = localStorage.getItem("redirect_after_login");
+
+            if(redirect){
+                localStorage.removeItem("redirect_after_login");
+                window.location.href = redirect;
+            }
+            else{
+                window.location.href = "/upload-image";
+            }
+
+        }
+        else{
+
+            alert(data.error || "Login failed");
+
+        }
+
+    }
+    catch(err){
+
+        console.error("Login error:", err);
+        alert("Network error. Please try again.");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

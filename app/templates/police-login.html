@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Police Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      width: 320px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Police Login</h1>
+
+    <form id="loginForm">
+      <input
+        id="emailOrMobile"
+        type="text"
+        placeholder="Email or Mobile"
+        required
+      >
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        required
+      >
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    // already logged in
+    const existingToken = localStorage.getItem("access_token");
+    if (existingToken) {
+      window.location.href = "/police-dashboard";
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const emailOrMobile = document.getElementById("emailOrMobile").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      try {
+        const response = await fetch("/police-login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            emailOrMobile: emailOrMobile,
+            password: password
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.access_token) {
+          localStorage.setItem("access_token", data.access_token);
+          window.location.href = "/police-dashboard";
+        } else {
+          alert(data.error || "Login failed");
+        }
+
+      } catch (error) {
+        alert("Network error: " + error.message);
+      }
+    });
+  </script>
+
+</body>
+</html>
